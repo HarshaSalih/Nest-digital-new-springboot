@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
+import java.security.Security;
 import java.util.List;
 
 public interface EmployeeDao extends CrudRepository<Employee,Integer> {
@@ -25,5 +26,6 @@ public interface EmployeeDao extends CrudRepository<Employee,Integer> {
 
     @Query(value = "SELECT `id`, `confirm_password`, `designation`, `email`, `emp_code`, `name`, `password`, `phone`, `salary`, `username` FROM `employee` WHERE `id`=:id",nativeQuery = true)
     List<Employee> viewProfile(@Param("id")Integer id);
+
 
 }
