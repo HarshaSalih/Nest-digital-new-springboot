@@ -83,7 +83,7 @@ public class AdminController {
     @PostMapping(path="/viewProfile",consumes = "application/json",produces = "application/json")
     public List<Employee>viewProfile(@RequestBody Employee e)
     {
-        return dao.viewProfile(e.getId());
+        return (List<Employee>) dao.viewProfile(e.getId());
     }
 
     @CrossOrigin(origins = "*")
@@ -151,7 +151,7 @@ public class AdminController {
     @PostMapping(path="/viewSecurityProfile",consumes = "application/json",produces = "application/json")
     public List<Security>viewSecurityProfile(@RequestBody Security s)
     {
-        return dao1.viewSecurityProfile((s.getId()));
+        return (List<Security>) dao1.viewSecurityProfile((s.getId()));
     }
 
 }

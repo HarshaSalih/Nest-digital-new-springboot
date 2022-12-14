@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,24 +31,26 @@ public class LeaveController {
         return "{status:'success'}";
     }
 
-    @Transactional
+
     @CrossOrigin(origins = "*")
     @PostMapping(path = "/updateStatus", consumes = "application/json", produces = "application/json")
-    public String updateStatus(@RequestBody Leave l) {
+    public Map<String,String> updateStatus(@RequestBody Leave l) {
         ldao.updateById(l.getStatus(), l.getId());
-        return "{status:'success'}";
+        HashMap<String,String> map=new HashMap<>();
+        map.put("status","success");
+        return map;
     }
 
     @CrossOrigin(origins = "*")
     @GetMapping("/viewAllLeaves")
-    public List<Map<String, String>> viewAllLeaves() {
-        return (List<Map<String, String>>) ldao.viewAllLeaveBy();
+    public List<Leave> viewAllLeaves() {
+        return (List<Leave>) ldao.findAll();
 
     }
 
-    @CrossOrigin(origins = "*")
-    @PostMapping(path = "/viewLeavesByEmpId",consumes = "application/json",produces = "application/json")
-    public  List<Map<String,String>> viewLeavesById(@RequestBody Leave l){
-        return (List<Map<String, String>>) ldao.viewLeaveById(l.getEmpId());
-    }
+//    @CrossOrigin(origins = "*")
+//    @PostMapping(path = "/viewLeavesByEmpId",consumes = "application/json",produces = "application/json")
+//    public  List<Map<String,String>> viewLeavesById(@RequestBody Leave l){
+//        return (List<Map<String, String>>) ldao.viewLeaveById(l.getEmpId());
+//    }
 }
