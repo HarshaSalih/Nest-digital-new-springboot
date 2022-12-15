@@ -37,22 +37,16 @@ public class LeaveController {
     @CrossOrigin(origins = "*")
     @PostMapping(path = "/updateStatus", consumes = "application/json", produces = "application/json")
     public Map<String,String> updateStatus(@RequestBody Leave l) {
-        ldao.updateById(l.getStatus(), l.getId());
+        ldao.updateById(l.getStatus(), l.getEmpId());
         HashMap<String,String> map=new HashMap<>();
         map.put("status","success");
         return map;
     }
 
     @CrossOrigin(origins = "*")
-    @GetMapping("/viewAllLeaves")
-    public List<Leave> viewAllLeaves() {
-        return (List<Leave>) ldao.findAll();
-
+    @GetMapping(path = "/viewAllLeave")
+    public List<Map<String,String>> viewAllLeave()
+    {
+        return (List<Map<String, String>>) ldao.viewAllLeave();
     }
-
-//    @CrossOrigin(origins = "*")
-//    @PostMapping(path = "/viewLeavesByEmpId",consumes = "application/json",produces = "application/json")
-//    public  List<Map<String,String>> viewLeavesById(@RequestBody Leave l){
-//        return (List<Map<String, String>>) ldao.viewLeaveById(l.getEmpId());
-//    }
 }
