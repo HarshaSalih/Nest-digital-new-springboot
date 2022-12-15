@@ -6,25 +6,29 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="employee_log")
+@Table(name = "visitor_log")
 
-public class EmployeeLog {
+public class VisitorLog {
 
     @Id
     @GeneratedValue
 
     private int id;
-    private int empId;
+    private String name;
+    private String purpose;
+    private String whomToMeet;
     private String date;
     private String enterDateTime;
     private String exitDateTime;
 
-    public EmployeeLog() {
+    public VisitorLog() {
     }
 
-    public EmployeeLog(int id, int empId, String date, String enterDateTime, String exitDateTime) {
+    public VisitorLog(int id, String name, String purpose, String whomToMeet, String date, String enterDateTime, String exitDateTime) {
         this.id = id;
-        this.empId = empId;
+        this.name = name;
+        this.purpose = purpose;
+        this.whomToMeet = whomToMeet;
         this.date = date;
         this.enterDateTime = enterDateTime;
         this.exitDateTime = exitDateTime;
@@ -38,12 +42,28 @@ public class EmployeeLog {
         this.id = id;
     }
 
-    public int getEmpId() {
-        return empId;
+    public String getName() {
+        return name;
     }
 
-    public void setEmpId(int empId) {
-        this.empId = empId;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPurpose() {
+        return purpose;
+    }
+
+    public void setPurpose(String purpose) {
+        this.purpose = purpose;
+    }
+
+    public String getWhomToMeet() {
+        return whomToMeet;
+    }
+
+    public void setWhomToMeet(String whomToMeet) {
+        this.whomToMeet = whomToMeet;
     }
 
     public String getDate() {

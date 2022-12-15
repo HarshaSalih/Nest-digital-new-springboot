@@ -21,14 +21,16 @@ public class LeaveController {
 
     @CrossOrigin(origins = "*")
     @PostMapping(path = "/addLeave", consumes = "application/json", produces = "application/json")
-    public String addLeave(@RequestBody Leave l) {
+    public Map<String,String> addLeave(@RequestBody Leave l) {
         DateTimeFormatter dt = DateTimeFormatter.ofPattern("dd:MM:yyyy HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         String currentDate = String.valueOf((dt.format(now)));
         l.setApplyDate(currentDate);
 
         ldao.save(l);
-        return "{status:'success'}";
+        HashMap<String,String> map=new HashMap<>();
+        map.put("status","success");
+        return map;
     }
 
 
