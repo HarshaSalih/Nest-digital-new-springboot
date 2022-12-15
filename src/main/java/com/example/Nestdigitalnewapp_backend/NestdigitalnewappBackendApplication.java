@@ -10,4 +10,6 @@ public class NestdigitalnewappBackendApplication {
 		SpringApplication.run(NestdigitalnewappBackendApplication.class, args);
 	}
 
+
+
 }
