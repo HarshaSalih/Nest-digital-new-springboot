@@ -43,10 +43,17 @@ public class LeaveController {
         return map;
     }
 
+//    @CrossOrigin(origins = "*")
+//    @GetMapping(path = "/viewAllLeave")
+//    public List<Map<String,String>> viewAllLeave()
+//    {
+//        return (List<Map<String, String>>) ldao.viewAllLeave();
+//    }
+
     @CrossOrigin(origins = "*")
     @GetMapping(path = "/viewAllLeave")
-    public List<Map<String,String>> viewAllLeave()
+    public List<Leave> viewAllLeave()
     {
-        return (List<Map<String, String>>) ldao.viewAllLeave();
+        return (List<Leave>) ldao.findAll();
     }
 }
