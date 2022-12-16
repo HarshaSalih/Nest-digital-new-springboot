@@ -56,4 +56,23 @@ public class LeaveController {
     {
         return (List<Leave>) ldao.findAll();
     }
+
+    @CrossOrigin(origins = "*")
+    @PostMapping(path = "/accept",consumes = "application/json",produces = "application/json")
+    public Map<String,String> AcceptLeave(@RequestBody Leave l)
+    {
+        ldao.AcceptLeave(l.getEmpId());
+        HashMap<String,String> map=new HashMap<>();
+        map.put("status","success");
+
+        return map;
+    }
+    @CrossOrigin(origins = "*")
+    @PostMapping(path = "/searchStatus",consumes = "application/json",produces = "application/json")
+    public List<Leave> SearchStatus(@RequestBody Leave l)
+    {
+        String empId=String.valueOf(l.getEmpId());
+        System.out.println(empId);
+        return (List<Leave>) ldao.searchStatus(l.getEmpId());
+    }
 }
