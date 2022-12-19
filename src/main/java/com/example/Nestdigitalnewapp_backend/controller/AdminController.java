@@ -1,12 +1,17 @@
 package com.example.Nestdigitalnewapp_backend.controller;
 
 import com.example.Nestdigitalnewapp_backend.dao.EmployeeDao;
+import com.example.Nestdigitalnewapp_backend.dao.EmployeeLogDao;
+import com.example.Nestdigitalnewapp_backend.dao.LeaveCountDao;
 import com.example.Nestdigitalnewapp_backend.dao.SecurityDao;
 import com.example.Nestdigitalnewapp_backend.model.Employee;
+import com.example.Nestdigitalnewapp_backend.model.LeaveCount;
 import com.example.Nestdigitalnewapp_backend.model.Security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Year;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -18,6 +23,13 @@ public class AdminController {
     private EmployeeDao dao;
     @Autowired
     private SecurityDao dao1;
+
+
+    @Autowired
+    private LeaveCountDao daolc;
+
+    int year= Year.now().getValue();
+
 
     @CrossOrigin(origins = "*")
     @PostMapping(path = "/employeeLogin",consumes = "application/json",produces = "application/json")
@@ -47,6 +59,13 @@ public class AdminController {
         HashMap<String,String> map=new HashMap<>();
         dao.save(e);
         map.put("id",String.valueOf(e.getId()));
+        LeaveCount l=new LeaveCount();
+        l.setEmpId(e.getId());
+        l.setCasualLeave(20);
+        l.setSickLeave(7);
+        l.setSpecialLeave(3);
+        l.setYear(String.valueOf(year));
+        daolc.save(l);
         map.put("status","success");
         return map;
     }
